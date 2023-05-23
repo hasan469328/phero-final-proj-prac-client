@@ -15,7 +15,7 @@ const PopularItems = () => {
     })
   },[])
   return (
-    <section>
+    <section className="mb-20">
       <SectionTitle heading="from our menu" subheading="---Popular Items---"></SectionTitle>
       <div className="grid md:grid-cols-2 gap-6">
         {

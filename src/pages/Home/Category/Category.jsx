@@ -11,7 +11,7 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 
 const Category = () => {
   return (
-    <>
+    <div>
       <SectionTitle heading='order online' subheading='---From 11:00am to 10:00pm---'></SectionTitle>
       <Swiper
         slidesPerView={3}
@@ -53,7 +53,7 @@ const Category = () => {
           </p>
         </SwiperSlide>
       </Swiper>
-    </>
+    </div>
   );
 };
 
