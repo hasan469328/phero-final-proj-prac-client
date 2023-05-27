@@ -1,34 +1,44 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
+
 const Nav = () => {
-  const navOptions = <>
-    <li>
-              <a>Home</a>
-            </li>
-            <li tabIndex={0}>
-              <a>
-                Parent
-                <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-                </svg>
-              </a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
-  </>
+  const { user,logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+    .then(() => {})
+    .catch(error => console.log(error.message))
+  }
+  const navOptions = (
+    <>
+      <li>
+        <Link to={"/"}>Home</Link>
+      </li>
+      <li>
+        <Link to={"/menu"}>Our Menu</Link>
+      </li>
+      <li>
+        <Link to={"/order/salad"}>Our Order</Link>
+      </li>
+      <li>
+        <Link to={"/secret"}>Our Secret</Link>
+      </li>
+
+      {user ? (
+        <>
+          <li>
+            <button onClick={handleLogOut} className="btn btn-ghost">LogOut</button>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link to={"/login"}>Login</Link>
+          </li>
+        </>
+      )}
+    </>
+  );
   return (
     <>
       <div className="navbar fixed z-10 max-w-screen-xl mx-auto opacity-50 bg-black text-white">
@@ -60,11 +70,8 @@ const Nav = () => {
           <a className="btn btn-ghost normal-case text-xl">BISTRO BOSS</a>
         </div>
         <div className="hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {navOptions}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
-        
       </div>
     </>
   );
